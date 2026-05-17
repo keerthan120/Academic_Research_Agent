@@ -1,0 +1,8 @@
+__pycache__
+.env
+.git
+<<<<<<< HEAD
+*.pyc
+=======
+*.pyc
+>>>>>>> 7028d1e4f1feb1a8345e4574fe949030da8577ca

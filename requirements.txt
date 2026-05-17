@@ -1,0 +1,8 @@
+streamlit
+arxiv
+requests
+<<<<<<< HEAD
+python-dotenv
+=======
+python-dotenv
+>>>>>>> 7028d1e4f1feb1a8345e4574fe949030da8577ca
