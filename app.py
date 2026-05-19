@@ -10,10 +10,6 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-.main {
-    background-color: #f7f9fc;
-}
-
 .block-container {
     padding-top: 2rem;
     max-width: 1100px;
@@ -31,53 +27,52 @@ st.markdown("""
     margin-bottom: 25px;
 }
 
-.paper-card {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 16px;
-}
-
-.paper-title {
-    font-size: 20px;
+.paper-header {
+    font-size: 18px;
     font-weight: 700;
     color: #111827;
 }
 
 .meta {
-    color: #6b7280;
+    color: #4b5563;
     font-size: 14px;
 }
 
+.summary-box {
+    background-color: #f9fafb;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    line-height: 1.6;
+}
+
 .analysis-box {
-    background: #ffffff;
+    background-color: #ffffff;
     padding: 22px;
     border-radius: 10px;
     border: 1px solid #e5e7eb;
+    color: #111827;
 }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="title">Academic Research Assistant</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="subtitle">Search research papers from arXiv and generate an AI-powered academic analysis.</div>',
+    '<div class="subtitle">Search research papers from arXiv and generate AI-powered academic analysis.</div>',
     unsafe_allow_html=True
 )
 
 with st.sidebar:
     st.header("Settings")
     model = st.text_input("OpenRouter Model", value=DEFAULT_MODEL)
-    st.info("Make sure your OPENROUTER_API_KEY is saved in your .env file.")
 
 topic = st.text_input(
     "Enter research topic",
     placeholder="Example: artificial intelligence in healthcare"
 )
 
-search_button = st.button("Search and Analyze", type="primary")
-
-if search_button:
+if st.button("Search and Analyze", type="primary"):
     if not topic.strip():
         st.warning("Please enter a research topic.")
         st.stop()
@@ -93,16 +88,17 @@ if search_button:
         st.error("No papers found.")
     else:
         for i, paper in enumerate(papers, start=1):
-            st.markdown(f"""
-            <div class="paper-card">
-                <div class="paper-title">Paper {i}: {paper["title"]}</div>
-                <p class="meta"><b>Authors:</b> {", ".join(paper["authors"])}</p>
-                <p class="meta"><b>Published:</b> {paper["published"]}</p>
-                <p><b>URL:</b> <a href="{paper["url"]}" target="_blank">{paper["url"]}</a></p>
-                <p><b>Summary:</b></p>
-                <p>{paper["summary"]}</p>
-            </div>
-            """, unsafe_allow_html=True)
+            with st.expander(f"Paper {i}: {paper['title']}", expanded=True):
+                st.markdown(f'<div class="paper-header">{paper["title"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<p class="meta"><b>Authors:</b> {", ".join(paper["authors"])}</p>', unsafe_allow_html=True)
+                st.markdown(f'<p class="meta"><b>Published:</b> {paper["published"]}</p>', unsafe_allow_html=True)
+                st.markdown(f'**URL:** [{paper["url"]}]({paper["url"]})')
+
+                st.markdown("**Summary:**")
+                st.markdown(
+                    f'<div class="summary-box">{paper["summary"]}</div>',
+                    unsafe_allow_html=True
+                )
 
     st.subheader("AI Analysis")
 
