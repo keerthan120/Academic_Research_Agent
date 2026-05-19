@@ -13,20 +13,24 @@ st.markdown("""
 .main {
     background-color: #f7f9fc;
 }
+
 .block-container {
     padding-top: 2rem;
     max-width: 1100px;
 }
+
 .title {
     font-size: 38px;
     font-weight: 800;
     color: #1f2937;
 }
+
 .subtitle {
     font-size: 17px;
     color: #4b5563;
     margin-bottom: 25px;
 }
+
 .paper-card {
     background: white;
     padding: 18px;
@@ -34,15 +38,18 @@ st.markdown("""
     border: 1px solid #e5e7eb;
     margin-bottom: 16px;
 }
+
 .paper-title {
     font-size: 20px;
     font-weight: 700;
     color: #111827;
 }
+
 .meta {
     color: #6b7280;
     font-size: 14px;
 }
+
 .analysis-box {
     background: #ffffff;
     padding: 22px;
@@ -79,6 +86,7 @@ if search_button:
         papers, analysis = academic_coordinator(topic.strip(), model.strip())
 
     st.divider()
+
     st.subheader("Papers")
 
     if not papers:
@@ -97,6 +105,7 @@ if search_button:
             """, unsafe_allow_html=True)
 
     st.subheader("AI Analysis")
+
     st.markdown('<div class="analysis-box">', unsafe_allow_html=True)
     st.markdown(analysis)
     st.markdown('</div>', unsafe_allow_html=True)
