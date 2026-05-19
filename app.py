@@ -16,8 +16,7 @@ with st.sidebar:
     model = st.text_input("OpenRouter Model", value=DEFAULT_MODEL)
 
 topic = st.text_input(
-    "Enter research topic",
-    placeholder="Example: artificial intelligence in healthcare"
+    "Enter research topic"
 )
 
 if st.button("Search and Analyze", type="primary"):
